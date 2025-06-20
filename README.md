@@ -32,4 +32,5 @@ A sleek and simple full-stack expense tracker built using **React + Firebase**, 
 git clone https://github.com/amitkumarmadina/Smart_Expense_Tracking.git
 cd Smart_Expense_Tracking
 
-
+1. **Clone this repository**
+npm install
