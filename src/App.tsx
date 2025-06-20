@@ -23,13 +23,49 @@ function App() {
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [activeTab, setActiveTab] = useState<'expenses' | 'analytics'>('expenses');
 
+  // Auth and Session Inactivity
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
       setLoading(false);
     });
 
-    return () => unsubscribe();
+    // Sign out on tab/browser close
+    const handleUnload = async () => {
+      try {
+        await signOut(auth);
+        console.log('Signed out on tab/browser close');
+      } catch (err) {
+        console.error('Sign-out error:', err);
+      }
+    };
+
+    window.addEventListener('beforeunload', handleUnload);
+
+    // Auto sign-out after 15 minutes of inactivity
+    let timeout: NodeJS.Timeout;
+    const resetTimer = () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        console.log('Session expired due to inactivity.');
+        signOut(auth);
+      }, 15 * 60 * 1000); // 15 minutes
+    };
+
+    const activityEvents = ['mousemove', 'keydown', 'scroll', 'touchstart'];
+    activityEvents.forEach((event) =>
+      window.addEventListener(event, resetTimer)
+    );
+    resetTimer(); // Initial call
+
+    return () => {
+      unsubscribe();
+      window.removeEventListener('beforeunload', handleUnload);
+      activityEvents.forEach((event) =>
+        window.removeEventListener(event, resetTimer)
+      );
+      clearTimeout(timeout);
+    };
   }, []);
 
   const handleSignOut = async () => {
@@ -41,7 +77,7 @@ function App() {
   };
 
   const handleExpenseAdded = () => {
-    setRefreshTrigger(prev => prev + 1);
+    setRefreshTrigger((prev) => prev + 1);
   };
 
   const handleExpensesChange = (newExpenses: Expense[]) => {
@@ -81,7 +117,7 @@ function App() {
                 <p className="text-sm text-gray-600">Welcome back, {user.email}</p>
               </div>
             </div>
-            
+
             <div className="flex items-center space-x-4">
               <div className="hidden sm:flex items-center space-x-6 text-sm">
                 <div className="text-center">
@@ -95,7 +131,7 @@ function App() {
                   <p className="text-gray-600">Total Spent</p>
                 </div>
               </div>
-              
+
               <button
                 onClick={handleSignOut}
                 className="flex items-center px-4 py-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all duration-200"
