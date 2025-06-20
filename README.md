@@ -78,5 +78,8 @@ src/
 ```
 
 ## Made With ❤️ by AMIT KUMAR MADINA
-LinkedIn: linkedin.com/in/amitkumarmadina
-GitHub: @amitkumarmadina
+
+LinkedIn: [linkedin.com/in/amitkumarmadina](https://www.linkedin.com/in/amitkumarmadina/)
+
+Github: https://github.com/amitkumarmadina
+
