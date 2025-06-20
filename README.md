@@ -31,6 +31,33 @@ A sleek and simple full-stack expense tracker built using **React + Firebase**, 
 ```bash
 git clone https://github.com/amitkumarmadina/Smart_Expense_Tracking.git
 cd Smart_Expense_Tracking
+```
 
-1. **Clone this repository**
+2. **Install dependencies**
+
+```bash
 npm install
+```
+
+3. **Set up Firebase**
+
+Create a Firebase project at https://console.firebase.google.com
+
+Enable Firestore and Authentication
+
+Create .env file and add your keys:
+
+```env
+VITE_FIREBASE_API_KEY=your_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_id
+VITE_FIREBASE_APP_ID=your_app_id
+
+```
+
+4. **Run locally**
+```bash
+npm run dev
+```
