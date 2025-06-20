@@ -61,3 +61,22 @@ VITE_FIREBASE_APP_ID=your_app_id
 ```bash
 npm run dev
 ```
+
+## 🌐 Live Demo
+Deployed at: https://smart-expense-tracking.vercel.app/
+
+## 📁 Folder Structuer
+```bash
+src/
+│
+├── firebase.js          # Firebase config
+├── App.jsx              # Main App
+├── components/          # Reusable components
+│   ├── AddExpense.jsx
+│   ├── ExpenseList.jsx
+│   └── SummaryChart.jsx
+```
+
+## Made With ❤️ by AMIT KUMAR MADINA
+LinkedIn: linkedin.com/in/amitkumarmadina
+GitHub: @amitkumarmadina
